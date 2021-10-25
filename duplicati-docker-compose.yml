@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  duplicati:
+    image: ghcr.io/linuxserver/duplicati
+    container_name: duplicati
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    volumes:
+      - /home/pi/docker/duplicati/:/config
+      - /var/lib/docker/:/backups
+      - /home/pi/docker/uptime-kuma/:/source # Change to Docker Volume locations
+      - /var/www/html/:/source/joomla # Change to Docker Volume locations or whatever you want to back up
+    ports:
+      - 8200:8200
+    restart: unless-stopped
